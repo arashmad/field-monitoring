@@ -1,7 +1,7 @@
 # Field Monitoring
 > description
 
-> [!INFO]
+> [!NOTE]
 > This document assumes that you are using **Linux Ubuntu 24.04** as the OS.
 
 ## Getting started
