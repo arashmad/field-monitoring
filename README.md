@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Field Monitoring
+> description
 
-## Getting Started
+> [!INFO]
+> This document assumes that you are using **Linux Ubuntu 24.04** as the OS.
 
-First, run the development server:
+## Getting started
+
+### 1. Requirement
+
+1. node `v24.11.0`.
+2. pnpm `v11.5.2`.
+
+> [!TIP]
+> Using nvm (node version manager) is very helpful.
+
+### 2. Install the application
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd /to/the/repository/field-monitoring-ui
+pnpm install
 ```
+
+### 2. Test the application
+```bash
+cd /to/the/repository/field-monitoring-ui
+pnpm lint # code style test
+pnpm test:typecheck # type checking test
+pnpm test # unit test (jest)
+pnpm test:e2e # e2e test (playwright)
+```
+
+### 2. Run the app
+
+The application is started locally on `:3000` by default. 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### 2.1 Run in development
+To start the server you need to do
+```bash
+cd /to/the/repository/field-monitoring-ui
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### 2.2 Serve the app
+?
