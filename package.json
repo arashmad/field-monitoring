@@ -9,6 +9,7 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "test": "jest",
+    "test:db": "jest --config jest.db.config.ts --runInBand",
     "jest": "jest --watch",
     "test:e2e": "pnpm exec playwright test",
     "test:e2e:ui": "pnpm exec playwright test --ui",
