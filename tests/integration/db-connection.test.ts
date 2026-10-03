@@ -20,4 +20,13 @@ describe("PostgreSQL connection", () => {
       { connected: 1, database: process.env.POSTGRES_DB },
     ]);
   }, 10_000);
+
+  it("has an enabled and callable PostGIS extension", async () => {
+    const result = await db.execute<{ version: string }>(
+      sql`SELECT PostGIS_Version() AS version`,
+    );
+
+    expect(result.rows).toHaveLength(1);
+    expect(result.rows[0].version).toMatch(/^\d+\.\d+/);
+  }, 10_000);
 });
