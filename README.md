@@ -27,29 +27,32 @@ For the local deployment, create the `.env` file first
 cd /to/the/repository/field-monitoring-ui
 cp .env.example .env
 ```
-and then fill the variables.
+The example contains local development credentials. These `POSTGRES_*`
+variables configure Docker Compose, the database client, and Drizzle Kit.
+Keep `.env` untracked. No production credentials are needed.
 
-#### 2.2 Start the database
-
-```bash
-docker compose up --build
-```
-to check the database connection, you need to do
-```
-pnpm test:db
-```
-For maintaining the database, check [this document](../field-monitoring-ui/db/README.md).
-
-#### 2.3 Install packages
+#### 2.2 Install packages
 
 ```bash
-cd /to/the/repository/field-monitoring-ui
 pnpm install
 ```
 
+#### 2.3 Start and initialize the database
+
+```bash
+docker compose up -d --wait
+pnpm db:check
+pnpm db:migrate
+pnpm test:db
+```
+The committed baseline enables PostGIS. The integration tests verify both
+PostgreSQL connectivity and `PostGIS_Version()`. See [database setup and
+migrations](db/README.md) for the workflow and connection troubleshooting.
+
 ### 3. Test the application
 
-Jest tests live in `tests/unit/`; Playwright tests live in `tests/e2e/`.
+Jest unit tests live in `tests/unit/`; database integration tests live in
+`tests/integration/`; Playwright tests live in `tests/e2e/`.
 Install the browser binaries and Linux system dependencies before the first E2E
 run (the system dependency installation may request sudo):
 
@@ -71,9 +74,8 @@ automatically, or reuses it outside CI. E2E tests run in Chromium, Firefox, and
 WebKit. To run a single browser: `pnpm test:e2e --project=chromium`.
 Use `pnpm exec playwright show-report` to inspect the generated HTML report.
 
-No environment variables are required for the current application; `.env.example`
-records this. Database, authentication, and processing setup will be documented
-when those features are introduced.
+Database work requires the variables in `.env.example` and a running PostgreSQL
+instance. Run `pnpm test:db` separately from the UI unit tests (`pnpm test`).
 
 ### 4. Run the app
 
