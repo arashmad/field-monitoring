@@ -13,11 +13,34 @@ architecture boundaries, and M1–M10 roadmap.
 
 1. node `v24.11.0`.
 2. pnpm `v11.5.2`.
+3. docker
 
 > [!TIP]
 > Using nvm (node version manager) is very helpful.
 
-### 2. Install the application
+### 2. Build the infrastructure
+
+#### 2.1 Create the environments
+
+For the local deployment, create the `.env` file first
+```bash
+cd /to/the/repository/field-monitoring-ui
+cp .env.example .env
+```
+and then fill the variables.
+
+#### 2.2 Start the database
+
+```bash
+docker compose up --build
+```
+to check the database connection, you need to do
+```
+pnpm test:db
+```
+For maintaining the database, check [this document](../field-monitoring-ui/db/README.md).
+
+#### 2.3 Install packages
 
 ```bash
 cd /to/the/repository/field-monitoring-ui
