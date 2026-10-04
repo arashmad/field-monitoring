@@ -1,13 +1,16 @@
 import { defineConfig, devices } from "@playwright/test";
+import { loadTestEnv } from "./tests/helpers/test-env";
 
-const baseURL = "http://127.0.0.1:3000";
+loadTestEnv();
+
+const baseURL = "http://127.0.0.1:3100";
 
 export default defineConfig({
   testDir: "./tests/e2e",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: 1,
   reporter: [["list"], ["html", { open: "never" }]],
   use: {
     baseURL,
@@ -19,9 +22,10 @@ export default defineConfig({
     { name: "webkit", use: { ...devices["Desktop Safari"] } },
   ],
   webServer: {
-    command: "pnpm dev --hostname 127.0.0.1 --port 3000",
+    command: "pnpm dev --hostname 127.0.0.1 --port 3100",
     url: baseURL,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
+    env: { BETTER_AUTH_URL: baseURL, NODE_ENV: "test" },
     timeout: 120_000,
   },
 });
