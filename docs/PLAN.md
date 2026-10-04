@@ -8,8 +8,8 @@ boundary, acquisition date, and data-quality information so users can distinguis
 possible crop changes from cloud cover or unavailable data.
 
 This document describes the intended product, not features already implemented.
-The repository currently contains the Next.js application foundation and baseline
-tests. M1 is defined by [issues #1–#7](https://github.com/arashmad/field-monitoring/issues?q=is%3Aissue+M1).
+The repository currently contains the Next.js application foundation, PostgreSQL/
+PostGIS, and Better Auth with a protected application shell. M1 is defined by [issues #1–#7](https://github.com/arashmad/field-monitoring/issues?q=is%3Aissue+M1).
 M2–M10 below are a proposed sequence to refine before each milestone starts.
 
 ## MVP Scope
@@ -54,8 +54,8 @@ in [issue #2](https://github.com/arashmad/field-monitoring/issues/2).
 A Field belongs to one Farm, and access to a Field follows its Farm's owner.
 Validate supported Polygon geometry on the server and calculate area using an
 appropriate geographic/projected calculation, rather than treating degrees as
-square metres. The concrete schema and authentication provider are selected in
-their implementation issues; neither is implemented by the foundation milestone.
+square metres. Better Auth now owns authentication identity and database sessions. Farm and Field
+schemas are selected in their implementation issues.
 
 ### Maps and satellite data
 
@@ -87,9 +87,8 @@ raster persistence is implemented. [Issue #8](https://github.com/arashmad/field-
 lists options, not a selected provider. Avoid deployment infrastructure, queues,
 and speculative services in the foundation milestone.
 
-No environment variables are required for the current app. Add documented,
-non-secret placeholders to `.env.example` when database, authentication, or storage
-configuration is introduced. Keep actual credentials in ignored environment files.
+Database and authentication variables are documented in `.env.example`. Add
+non-secret placeholders when storage configuration is introduced. Keep actual credentials in ignored environment files.
 
 ### Verification
 
