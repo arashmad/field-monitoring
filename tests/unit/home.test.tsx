@@ -8,11 +8,11 @@ describe("Home", () => {
     expect(screen.getByRole("heading", { level: 1 })).toBeVisible();
   });
 
-  it("provides a link to the Next.js documentation", () => {
+  it("provides a link to sign in", () => {
     render(<Home />);
 
     expect(
-      screen.getByRole("link", { name: "Documentation" }),
-    ).toHaveAttribute("href", expect.stringMatching(/^https:\/\/nextjs\.org\/docs(?:\?|$)/));
+      screen.getByRole("link", { name: "Sign in" }),
+    ).toHaveAttribute("href", "/sign-in");
   });
 });

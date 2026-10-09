@@ -30,7 +30,8 @@ drizzle.config.ts   Drizzle Kit configuration; loads the Next.js environment
 db/
   client.ts        Server-only pooled connection used by the app
   schemas/
-    index.ts       Schema input, currently empty by design
+    index.ts       Schema entry point; re-exports auth.ts
+    auth.ts        Better Auth users, accounts, sessions and verification
   migrations/
     <timestamp>_enable_postgis/
       migration.sql
@@ -41,7 +42,9 @@ The initial custom migration runs `CREATE EXTENSION IF NOT EXISTS postgis`.
 It works whether the Docker image has already enabled PostGIS or the target
 database has no extension yet. The target PostgreSQL server must have PostGIS
 installed, and the migration user must have permission to enable it. There are
-no farm, field, authentication, or demo tables in this baseline.
+no farm, field, or demo tables. The subsequent authentication migration adds
+Better Auth tables and cascading user ownership links. See
+[authentication setup](../docs/AUTHENTICATION.md) for account provisioning.
 
 ## Migration workflow
 

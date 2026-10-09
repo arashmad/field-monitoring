@@ -6,6 +6,7 @@ import "server-only";
 
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
+import { authRelations } from "./schemas/auth";
 
 function requiredEnv(name: string): string {
   const value = process.env[name];
@@ -38,4 +39,4 @@ if (process.env.NODE_ENV !== "production") {
   globalForDb.postgresPool = pool; // Avoid creating a new pool in 'Hot reload'
 }
 
-export const db = drizzle({ client: pool });
+export const db = drizzle({ client: pool, relations: { ...authRelations } });
