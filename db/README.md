@@ -30,9 +30,10 @@ drizzle.config.ts   Drizzle Kit configuration; loads the Next.js environment
 db/
   client.ts        Server-only pooled connection used by the app
   schemas/
-    index.ts       Schema entry point; re-exports auth.ts and farm.ts
+    index.ts       Schema entry point; re-exports auth.ts, farm.ts and field.ts
     auth.ts        Better Auth users, accounts, sessions and verification
     farm.ts        Owner-scoped Farms
+    field.ts       Polygon Fields and generated area
   migrations/
     <timestamp>_enable_postgis/
       migration.sql
@@ -44,9 +45,12 @@ It works whether the Docker image has already enabled PostGIS or the target
 database has no extension yet. The target PostgreSQL server must have PostGIS
 installed, and the migration user must have permission to enable it. The
 authentication migration adds Better Auth tables and cascading user ownership
-links. The Farm migration adds an owner-scoped Farm table; Field tables are future
-work. See
-[authentication setup](../docs/AUTHENTICATION.md) for account provisioning.
+links. The Farm migration adds an owner-scoped Farm table. The Field migration
+adds `geometry(Polygon,4326)` with a stored area in square metres calculated by
+PostGIS from WGS84 geography. Field timestamps retain timezone information.
+Fields use longitudes from −180 to 180 and
+latitudes from −85 to 85; a longitude span of 180° or more is unsupported.
+See [authentication setup](../docs/AUTHENTICATION.md) for account provisioning.
 
 ## Migration workflow
 
@@ -82,6 +86,7 @@ Keep applied migrations immutable; create a new migration for later changes.
 
 ```bash
 pnpm test:db
+pnpm test:field-schema
 ```
 
 The tests use the real `db/client.ts` connection. They run `SELECT 1`, verify
