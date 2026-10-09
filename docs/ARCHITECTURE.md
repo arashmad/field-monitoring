@@ -11,10 +11,10 @@ defines a deferred analysis contract.
 The current repository has Next.js/TypeScript, Jest/Playwright foundations,
 Docker Compose for PostgreSQL/PostGIS, a server-only pooled Drizzle client,
 `POSTGRES_*` configuration, and committed PostGIS/authentication migrations.
-Better Auth email/password authentication and the protected `/app` shell are
-implemented. [AUTHENTICATION.md](AUTHENTICATION.md) defines setup, session policy,
-and the server-only ownership identity contract. Farm/Field schemas, MapLibre
-integration, `processing/`, raster persistence, and
+Better Auth email/password authentication, the protected `/app` shell, and
+owner-scoped Farm management are implemented. [AUTHENTICATION.md](AUTHENTICATION.md)
+defines setup, session policy, and the server-only ownership identity contract.
+Field schemas, MapLibre integration, `processing/`, raster persistence, and
 job execution are future work. [Database documentation](../db/README.md) owns
 setup and migration commands. PLAN.md's foundation-era descriptions of absent
 database configuration should be read alongside this implemented baseline; the
