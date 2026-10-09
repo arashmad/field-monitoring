@@ -1,7 +1,7 @@
 # Field Monitoring
 
-Next.js foundation for managing agricultural Fields and monitoring vegetation
-with Sentinel-2 data. See [the project plan](docs/PLAN.md) for the MVP scope,
+Next.js app with authentication and owner-scoped Farm management. Field geometry
+and Sentinel-2 monitoring are planned. See [the project plan](docs/PLAN.md) for the MVP scope,
 architecture boundaries, and M1–M10 roadmap.
 
 > [!NOTE]
@@ -56,6 +56,9 @@ Add `BETTER_AUTH_SECRET` and `BETTER_AUTH_URL` from `.env.example` to your ignor
 instructions in [authentication setup](docs/AUTHENTICATION.md). Public sign-up is
 disabled. Sign in at `/sign-in` to access `/app`.
 
+The protected `/app` page lets you create and list your Farms. Open a Farm to
+view its details and change its name. Farms are private to the signed-in user.
+
 ```bash
 pnpm auth:create-user --email grower@example.com --name "Grower"
 ```
@@ -78,6 +81,7 @@ pnpm exec playwright install --with-deps
 cd /to/the/repository/field-monitoring-ui
 pnpm lint # code style test
 pnpm test:typecheck # type checking test
+pnpm test:farms # Farm ownership and validation integration tests (migrated PostgreSQL)
 pnpm test # unit test (jest)
 pnpm test:auth # real authentication/session tests (requires migrated PostgreSQL)
 pnpm test:e2e # e2e test (playwright)
