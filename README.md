@@ -1,8 +1,9 @@
 # Field Monitoring
 
-Next.js app with authentication and owner-scoped Farm management. Field geometry
-and Sentinel-2 monitoring are planned. See [the project plan](docs/PLAN.md) for the MVP scope,
-architecture boundaries, and M1–M10 roadmap.
+Next.js app with authentication, owner-scoped Farm management, and Field Polygon
+persistence. Field drawing UI and Sentinel-2 monitoring are planned. See
+[the project plan](docs/PLAN.md) for the MVP scope, architecture boundaries,
+and M1–M10 roadmap.
 
 > [!NOTE]
 > This document assumes that you are using **Linux Ubuntu 24.04** as the OS.
@@ -82,6 +83,8 @@ cd /to/the/repository/field-monitoring-ui
 pnpm lint # code style test
 pnpm test:typecheck # type checking test
 pnpm test:farms # Farm ownership and validation integration tests (migrated PostgreSQL)
+pnpm test:field-schema # PostGIS Field schema and derived-area checks
+pnpm test:fields # Field ownership, topology and persistence integration tests
 pnpm test # unit test (jest)
 pnpm test:auth # real authentication/session tests (requires migrated PostgreSQL)
 pnpm test:e2e # e2e test (playwright)

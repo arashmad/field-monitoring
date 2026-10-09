@@ -11,11 +11,12 @@ defines a deferred analysis contract.
 The current repository has Next.js/TypeScript, Jest/Playwright foundations,
 Docker Compose for PostgreSQL/PostGIS, a server-only pooled Drizzle client,
 `POSTGRES_*` configuration, and committed PostGIS/authentication migrations.
-Better Auth email/password authentication, the protected `/app` shell, and
-owner-scoped Farm management are implemented. [AUTHENTICATION.md](AUTHENTICATION.md)
-defines setup, session policy, and the server-only ownership identity contract.
-Field schemas, MapLibre integration, `processing/`, raster persistence, and
-job execution are future work. [Database documentation](../db/README.md) owns
+Better Auth email/password authentication, the protected `/app` shell,
+owner-scoped Farm management, and the Field spatial data boundary are implemented.
+[AUTHENTICATION.md](AUTHENTICATION.md) defines setup, session policy, and the
+server-only ownership identity contract. MapLibre integration, `processing/`,
+raster persistence, and job execution are future work.
+[Database documentation](../db/README.md) owns
 setup and migration commands. PLAN.md's foundation-era descriptions of absent
 database configuration should be read alongside this implemented baseline; the
 roadmap is unchanged.
@@ -43,8 +44,10 @@ A Field belongs to one Farm and inherits its owner's access boundary. Validate
 supported single Polygon inputs on the server before persistence. Store geometry
 with an explicit CRS; interchange GeoJSON uses longitude/latitude in WGS84.
 Calculate area with an appropriate geographic or projected method, never by
-interpreting degree-based coordinates as square metres. The implementation must
-define supported geographic extent and reject unsupported geometries explicitly.
+interpreting degree-based coordinates as square metres. The Field boundary uses
+WGS84 Polygon geometry with longitude in [−180, 180], latitude in [−85, 85],
+and longitude extent below 180°. PostGIS validates topology and derives stored
+square-metre area from geography; unsupported geometries are rejected.
 
 Drizzle and versioned migrations own the application's schema evolution.
 PostGIS provides spatial validation, intersection, and geometry storage. Do not

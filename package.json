@@ -12,6 +12,8 @@
     "test:db": "jest --config jest.db.config.ts --runInBand",
     "test:auth": "tsx --conditions=react-server --test tests/integration/auth.test.mts",
     "test:farms": "tsx --conditions=react-server --test tests/integration/farms.test.mts",
+    "test:field-schema": "tsx --conditions=react-server --test tests/integration/field-schema.test.mts",
+    "test:fields": "tsx --conditions=react-server --test tests/integration/fields.test.mts",
     "auth:create-user": "tsx --conditions=react-server scripts/create-user.mts",
     "jest": "jest --watch",
     "test:e2e": "pnpm exec playwright test",
